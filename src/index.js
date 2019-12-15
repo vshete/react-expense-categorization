@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
 import './index.css';
-import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './app/App';
+import reducer from './reducer/Reducer';
 import * as serviceWorker from './serviceWorker';
+
+export const store = createStore(reducer);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

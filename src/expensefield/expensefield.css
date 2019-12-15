@@ -1,0 +1,8 @@
+.expenseField {
+  width: 600px;
+  margin: 10px auto;
+}
+.add-expense-button {
+  /* width: 50px; */
+  border-radius: 0 3px 3px 0;
+}
