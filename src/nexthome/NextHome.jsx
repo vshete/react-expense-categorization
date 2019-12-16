@@ -1,31 +1,34 @@
 import React, {Component} from "react";
 import { Button } from 'reactstrap';
-import { store } from '../index';
+import { connect } from "react-redux";
 
+const mapStateToProps = state => {
+  return {
+    count: state.count
+  }
+}
 
-export default class NextHome extends Component {
+const mapDispatchToProps = dispatch => {
+  return {
+    increment: () => dispatch({type: 'INCREMENT'})
+  }
+}
+
+class NextHomeClass extends Component {
   constructor(props) {
     super(props)
     this.increment = this.increment.bind(this);
-    this.state = {
-      count: 0
-    };
-
-    store.subscribe(() => {
-      this.setState({ count: store.getState().count})
-    });
   }
 
   increment() {
-    store.dispatch({type: 'INCREMENT'});
-    this.setState({ count: store.getState().count})
+    this.props.increment();
   }
 
   render() {
     return (
       <div>
       Next Home...
-      <span>{this.state.count}</span>
+      <span>{this.props.count}</span>
       <div>
         <Button onClick={this.increment}>+1</Button>
       </div>
@@ -33,3 +36,5 @@ export default class NextHome extends Component {
     );
   }
 }
+
+export const NextHome = connect(mapStateToProps, mapDispatchToProps)(NextHomeClass);

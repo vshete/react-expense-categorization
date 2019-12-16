@@ -1,21 +1,21 @@
-export default function reducer({count, ...restProps} = {count: 0,expenses: []}, {type, payload}) {
+const initialState = {
+  count: 0,
+  expenses: []
+};
+
+export default function reducer(state = initialState, {type, payload}) {
   switch (type) {
     case 'INCREMENT':
-      return {count: count + 1, ...restProps}
+      state.count += 1;
+      return state;
     case 'DECREMENT':
-      return {count: count - 1, ...restProps}
+      state.count += 1;
+      return state;
     case 'ADD_EXPENSE':
-      addExpense(restProps, payload)
-      return {count, ...restProps}
+      return Object.assign({}, state, {
+        expenses: state.expenses.concat(payload)
+      })
     default:
-      return {count, ...restProps}
-  }
-}
-
-function addExpense(restProps, payload) {
-  if(restProps.expenses) {
-    restProps.expenses.push({amount: payload.amount})
-  } else {
-    restProps.expenses = [{amount :payload.amount}];
+      return state
   }
 }

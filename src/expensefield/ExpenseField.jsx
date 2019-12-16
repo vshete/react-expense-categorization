@@ -6,21 +6,25 @@ import {
   Input,
   Button
 } from "reactstrap";
+import { connect } from "react-redux";
 import './expensefield.css'
-import { store } from '../index';
 
-export default class ExpenseField extends Component {
+const mapDispatchToProps = dispatch => {
+  return {
+    addExpense: (amount) => dispatch({type: 'ADD_EXPENSE', payload: {amount: amount}})
+  }
+}
+
+class ExpenseFieldClass extends Component {
   constructor(props) {
     super(props)
-    this.state = {amount: 0};
     this.addExpense = this.addExpense.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   addExpense(e) {
     if(!isNaN(parseFloat(this.amount))) {
-      store.dispatch({type: 'ADD_EXPENSE', payload: {amount: this.amount}});
-      console.log(store.getState());
+      this.props.addExpense(this.amount)
     }
   }
 
@@ -42,3 +46,5 @@ export default class ExpenseField extends Component {
     );
   }
 }
+
+export const ExpenseField = connect(null, mapDispatchToProps)(ExpenseFieldClass)

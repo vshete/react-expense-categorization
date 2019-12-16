@@ -1,6 +1,6 @@
 import React from 'react';
-import Home from '../home/Home';
-import NextHome from '../nexthome/NextHome';
+import { Home } from '../home/Home';
+import { NextHome } from '../nexthome/NextHome';
 import './App.css';
 
 import PieChart from '../piechart/PieChart';

@@ -13,25 +13,29 @@ import {
   DropdownItem,
   NavbarText
 } from "reactstrap";
-import { store } from '../index';
+import { connect } from "react-redux";
 
-export default class Header extends Component {
+const mapStateToProps = state => {
+  return {
+    expenses: state.expenses
+  }
+}
+
+class HeaderClass extends Component {
   constructor(props) {
     super(props);
     this.isOpen = false;
-    this.state = {expenses: store.getState().expenses || []};
   }
 
   sumExpenses() {
     let sum = 0;
-    this.state.expenses.map((value) => {
+    this.props.expenses.map((value) => {
       sum += parseFloat(value.amount);
     });
     return sum;
   }
 
   render() {
-    // const [isOpen, setIsOpen] = useState(false);
     const toggle = () => this.isOpen = !this.isOpen;
     return (
       <div>
@@ -71,3 +75,5 @@ export default class Header extends Component {
     );
   }
 }
+
+export const Header  = connect(mapStateToProps)(HeaderClass);
