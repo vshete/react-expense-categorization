@@ -3,7 +3,7 @@ import { Home } from '../home/Home';
 import { NextHome } from '../nexthome/NextHome';
 import './App.css';
 
-import PieChart from '../piechart/PieChart';
+import { PieChart1 } from '../piechart/PieChart';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <NextHome/>
       <br/>
       <br/>
-      <PieChart/>
+      <PieChart1/>
     </div>
   );
 }

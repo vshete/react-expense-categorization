@@ -18,17 +18,17 @@ const mapDispatchToProps = dispatch => {
 class ExpenseFieldClass extends Component {
   constructor(props) {
     super(props)
-    this.addExpense = this.addExpense.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    // this.addExpense = this.addExpense.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
   }
 
-  addExpense(e) {
+  addExpense = (e) => {
     if(!isNaN(parseFloat(this.amount))) {
       this.props.addExpense(this.amount)
     }
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.amount = e.target.value;
   }
 

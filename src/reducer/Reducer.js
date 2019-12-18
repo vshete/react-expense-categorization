@@ -14,7 +14,7 @@ export default function reducer(state = initialState, {type, payload}) {
     case 'ADD_EXPENSE':
       return Object.assign({}, state, {
         expenses: state.expenses.concat(payload)
-      })
+      });
     default:
       return state
   }

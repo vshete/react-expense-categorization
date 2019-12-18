@@ -9,7 +9,6 @@ const mapStateToProps = state => {
 
 class ExpenseTableClass extends Component {
   render() {
-    console.log(this.props.expenses);
     return (
       <section className={this.props.expenses.length === 0 ? 'hide expenseTable': 'expenseTable'}>
         <div>Expenses:</div>
