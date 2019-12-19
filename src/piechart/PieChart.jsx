@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { PieChart, Pie, Cell } from 'recharts';
-import CanvasJSReact from '../canvas/CanvasJSChart';
+import {
+	PieChart,
+	Pie,
+	Cell,
+	ResponsiveContainer
+ } from 'recharts';
 import { connect } from "react-redux";
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
 
 const mapStateToProps = state => {
 	return {
@@ -15,13 +17,8 @@ class PieChartClass extends Component {
 
 	constructor(props) {
 		super(props);
-		this.dataPoints = [
-			{name: "shopping", value: 0},
-			{name: "dining", value: 0},
-			{name: "fuel", value: 0},
-			{name: "entertainment", value: 0},
-			{name: "other", value: 0}
-		];
+		this.categorizedData = {};
+		this.dataPoints = [];
 	}
 
 	getRandomIndex() {
@@ -30,9 +27,19 @@ class PieChartClass extends Component {
 
 	addData() {
 		for (var i = 0; i < this.props.expenses.length; i++) {
-			const randomIdx = this.getRandomIndex();
-			this.dataPoints[randomIdx].value += parseFloat(this.props.expenses[i].amount)
+			const category = this.props.expenses[i].category;
+			const oldAmount = this.categorizedData[category];
+			const toBeAdded = this.props.expenses[i].amount;
+
+			this.categorizedData[category] = isNaN(oldAmount) ? toBeAdded.toFixed(2) : (() => {
+				const result = parseFloat(oldAmount + toBeAdded);
+				return result.toFixed(2);
+			})();
 		}
+
+		Object.keys(this.categorizedData).forEach((key) => {
+			this.dataPoints.push({category: key, amount: parseFloat(this.categorizedData[key])});
+		})
 	}
 
 	getRandomColor() {
@@ -44,59 +51,18 @@ class PieChartClass extends Component {
 	  return color;
 	}
 
-	renderCustomizedLabel = ({
-	  cx, cy, midAngle, innerRadius, outerRadius, percent, index,
-	}) => {
-		const RADIAN = Math.PI / 180;
-	  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-	  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-	  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-	  return (
-	    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-	      {`${(percent * 100).toFixed(0)}%`}
-	    </text>
-	  );
-	};
-
 	render() {
-		const data01 = [
-		  {
-		    "name": "Group A",
-		    "value": 400
-		  },
-		  {
-		    "name": "Group B",
-		    "value": 300
-		  },
-		  {
-		    "name": "Group C",
-		    "value": 300
-		  },
-		  {
-		    "name": "Group D",
-		    "value": 200
-		  },
-		  {
-		    "name": "Group E",
-		    "value": 278
-		  },
-		  {
-		    "name": "Group F",
-		    "value": 189
-		  }
-		];
 		this.addData();
 		return (
-			<div>
-				<PieChart width={500} height={500}>
-				  <Pie data={this.dataPoints} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={150} fill="#8884d8" label>
+			<ResponsiveContainer width="50%" height={550} className="pie-chart-wrapper col-sm-6 col-lg-6">
+				<PieChart >
+				  <Pie data={this.dataPoints} dataKey="amount" nameKey="category" cx="50%" cy="50%" outerRadius={225} fill="#8884d8" label>
 						{this.dataPoints.map((value, index) => {
 							return <Cell key={Math.random()} fill={this.getRandomColor()}/>
 						})}
 					</Pie>
 				</PieChart>
-			</div>
+			</ResponsiveContainer>
 		);
 	}
 }

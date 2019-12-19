@@ -3,6 +3,7 @@ import { Button } from 'reactstrap';
 import { Header } from "../header/Header";
 import { ExpenseField } from "../expensefield/ExpenseField";
 import { ExpenseTable } from '../expensetable/ExpenseTable';
+import { PieChart1 } from '../piechart/PieChart';
 import { connect } from "react-redux";
 
 
@@ -32,12 +33,9 @@ class HomeClass extends Component {
     return (
       <div>
         <Header />
-        <ExpenseTable/>
-        <ExpenseField/>
-        Home...
-        <span>{this.props.count}</span>
-        <div>
-          <Button onClick={this.increment}>+1</Button>
+        <div className="row">
+          <ExpenseTable/>
+          <PieChart1/>
         </div>
       </div>
     );

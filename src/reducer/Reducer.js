@@ -1,6 +1,8 @@
+import { expenses } from './Expenses';
+
 const initialState = {
   count: 0,
-  expenses: []
+  expenses: expenses
 };
 
 export default function reducer(state = initialState, {type, payload}) {
