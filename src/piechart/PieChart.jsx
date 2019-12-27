@@ -14,22 +14,17 @@ const mapStateToProps = state => {
 }
 
 class PieChartClass extends Component {
-
-	constructor(props) {
-		super(props);
-		this.categorizedData = {};
-		this.dataPoints = [];
-	}
-
 	getRandomIndex() {
 		return Math.round(Math.random() * (this.dataPoints.length - 1));
 	}
 
 	addData() {
+		this.categorizedData = {};
+		this.dataPoints = [];
 		for (var i = 0; i < this.props.expenses.length; i++) {
 			const category = this.props.expenses[i].category;
-			const oldAmount = this.categorizedData[category];
-			const toBeAdded = this.props.expenses[i].amount;
+			const oldAmount = parseFloat(this.categorizedData[category]);
+			const toBeAdded = parseFloat(this.props.expenses[i].amount);
 
 			this.categorizedData[category] = isNaN(oldAmount) ? toBeAdded.toFixed(2) : (() => {
 				const result = parseFloat(oldAmount + toBeAdded);
@@ -39,7 +34,7 @@ class PieChartClass extends Component {
 
 		Object.keys(this.categorizedData).forEach((key) => {
 			this.dataPoints.push({category: key, amount: parseFloat(this.categorizedData[key])});
-		})
+		});
 	}
 
 	getRandomColor() {

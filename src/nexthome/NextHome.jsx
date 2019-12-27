@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => {
 
 class NextHomeClass extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.increment = this.increment.bind(this);
   }
 

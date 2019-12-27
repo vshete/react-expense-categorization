@@ -7,13 +7,10 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   NavbarText
 } from "reactstrap";
 import { connect } from "react-redux";
+import './header.css';
 
 const mapStateToProps = state => {
   return {
@@ -40,12 +37,15 @@ class HeaderClass extends Component {
     return (
       <div>
         <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/">Check your statement</NavbarBrand>
+          <NavbarBrand href="#">Your Expenses</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={this.isOpen} navbar>
             <Nav className="mr-auto" navbar>
+              <NavItem>
+                <NavLink href="#">Check your statement</NavLink>
+              </NavItem>
             </Nav>
-            <NavbarBrand className="spend-">Your spending: ${this.sumExpenses()}</NavbarBrand>
+            <NavbarText className="total-text">Total: ${this.sumExpenses()}</NavbarText>
           </Collapse>
         </Navbar>
       </div>

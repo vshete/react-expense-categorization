@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Button } from 'reactstrap';
 import { Header } from "../header/Header";
 import { ExpenseField } from "../expensefield/ExpenseField";
 import { ExpenseTable } from '../expensetable/ExpenseTable';
@@ -33,6 +32,7 @@ class HomeClass extends Component {
     return (
       <div>
         <Header />
+        <ExpenseField />
         <div className="row">
           <ExpenseTable/>
           <PieChart1/>
