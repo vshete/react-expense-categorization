@@ -1,4 +1,4 @@
-This is a react application that categorises the expenses and presents them in a graphical from using re-charts
+This is a react - redux application that categorises the expenses and presents them in a graphical from using re-charts
 
 To set up the application first clone the repository and then
 
